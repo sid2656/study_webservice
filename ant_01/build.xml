@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+	defaultÖ¸¶¨Ä¬ÈÏÖ´ÐÐµÄÈÎÎñ
+	target±íÊ¾µÄÊÇÃ¿Ò»Ïî¾ßÌåµÄÈÎÎñ
+	depends±íÊ¾ÒÀÀµÓÚÁíÒ»¸öÈÎÎñA£¬ÔÚÖ´ÐÐBµÄÊÇ»áÈ¥ÏÈÖ´ÐÐA
+
+	eclipseÖÐÅäÖÃant
+		1.Ant£ºÐÞ¸ÄDocumentationµÄURL
+		2.Ant->Runtime£»ÉèÖÃAnt Home EntriesÎª±¾µØµÄAntÎÄ¼þ¼Ð
+	´´½¨antÏîÄ¿µÄÁ÷³Ì
+		1.´´½¨ÎÄ¼þ¼Ð(ant±ê×¼)
+			src£º´æ·ÅÔ´Âë
+			build£ºËùÓÐµÄÎÄ¼þÐÅÏ¢¶¼±£´æÔÚÕâ¸öÎÄ¼þ¼Ð
+			classes£º±àÒëºÃµÄËùÓÐÎÄ¼þ±£´æÔÚÕâ¸öÎÄ¼þ¼Ð
+			dist£º´æ·Åproject.jar
+		2.±àÒëÔ´´úÂë
+		3.½«Ô´´úÂë´ò°üÎªjar
+		4.Ö±½ÓÔËÐÐ³ÌÐò
+-->
+<project name="myAnt" default="execute">
+    <target name="compile">
+        <javac srcdir="." destdir="."/>
+    </target>
+
+    <target name="execute" depends="compile">
+        <java classpath="." classname="HelloWorld"/>
+    </target>
+</project>

@@ -1,0 +1,24 @@
+异构平台间的交互
+
+生成新的接口和实现接口的类（用于存放在client端）
+-d		指定生成的目录
+-keep	指定是否生成源文件
+-p		指定报名
+-verbose显示生成详细过程
+wsimport -d D:\sid\workspace_webservice\wsimport -keep -verbose http://localhost:6666/ns?wsdl
+
+
+
+JAX-WS
+框架：
+CXF
+AXIS
+METRO
+
+
+SEI(Service EndPoint Interface)
+SIB(Service implement Bean)
+
+
+
+

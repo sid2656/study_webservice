@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://org.konghao.cxf.cal/"
+	xmlns:tns="http://org.konghao.cxf.cal/" elementFormDefault="unqualified">
+	<xsd:element name="add" type="tns:add"/>
+	<xsd:element name="addResponse" type="tns:addResponse"/>
+	<xsd:element name="licenseUser" type="tns:user"></xsd:element>
+	
+	<xsd:complexType name="user">
+		<xsd:sequence>
+			<xsd:element name="username" type="xsd:string"/>
+			<xsd:element name="password" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="add">
+		<xsd:sequence>
+			<xsd:element name="num1" type="xsd:int"/>
+			<xsd:element name="num2" type="xsd:int"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="addResponse">
+		<xsd:sequence>
+			<xsd:element name="rel" type="xsd:int"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

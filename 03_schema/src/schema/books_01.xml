@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	eclipse自动提示：
+		window-preferrece-xml-xml catalog然后点击add
+ -->
+<books:books xmlns:books="http://www.example.org/books" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.example.org/books">
+	<!-- 元素也是有顺序的 -->
+	<books:book id="1">
+		<books:title>java in action</books:title>
+		<books:content>java is good</books:content>
+		<books:author>Bruce</books:author>
+	</books:book>
+	<books:book id="2">
+		<books:title>lucence in actioin</books:title>
+		<books:content>lucence is good</books:content>
+		<books:authors>
+			<books:author>Jike</books:author>
+			<books:author>Mike</books:author>
+		</books:authors>
+	</books:book>
+</books:books>

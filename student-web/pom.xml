@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.konghao.student</groupId>
+		<artifactId>student-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../student-parent/pom.xml</relativePath>
+	</parent>
+
+	<artifactId>student-web</artifactId>
+	<packaging>war</packaging>
+	<name>student-web Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<dependencies>
+		<dependency>
+	      <groupId>org.jvnet.jax-ws-commons.spring</groupId>
+		  <artifactId>jaxws-spring</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>com.sun.xml.ws</groupId>
+		  <artifactId>jaxws-rt</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.konghao.poi</groupId>
+			<artifactId>poi-util</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>student-service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<!-- servlet+jstl+jsp -->
+		<dependency>
+			<groupId>servletapi</groupId>
+			<artifactId>servletapi</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>jsptags</groupId>
+			<artifactId>pager-taglib</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>student-web</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+          		<artifactId>jaxws-maven-plugin</artifactId>
+          		<configuration>
+          			<wsdlDirectory>src/main/resources/META-INF/wsdl</wsdlDirectory>
+          			<wsdlFiles>
+          				<wsdlFile>student.wsdl</wsdlFile>
+          			</wsdlFiles>
+          		</configuration>
+			</plugin>
+			<!-- <plugin> <groupId>org.codehaus.cargo</groupId> <artifactId>cargo-maven2-plugin</artifactId> 
+				<configuration> 配置Tomcat在本地的路径 <container> <containerId>tomcat6x</containerId> 
+				<home>D:\Tomcat6.0</home> </container> 配置容器信息 <configuration> statndalone表示独立运行，此时会在特定的目录加载一个相应的web项目， 
+				不会加载tomcat中原有的项目 <type>standalone</type> 希望加载路径的目录 <home>D:/webservice/tomcat6</home> 
+				properties中可以设置相应的端口的配置 <properties> 端口号设置7676为 <cargo.servlet.port>7676</cargo.servlet.port> 
+				</properties> </configuration> </configuration> </plugin> -->
+
+			<!-- <plugin> <groupId>org.codehaus.cargo</groupId> <artifactId>cargo-maven2-plugin</artifactId> 
+				基于existing的方式，会把项目发布到系统的Tomcat中的webapps中 <configuration> <container> <containerId>tomcat6x</containerId> 
+				<home>D:\Tomcat6.0</home> </container> <configuration> home设置为系统的tomcat目录 
+				<type>existing</type> <home>D:\Tomcat6.0</home> </configuration> </configuration> 
+				</plugin> -->
+		</plugins>
+	</build>
+</project>

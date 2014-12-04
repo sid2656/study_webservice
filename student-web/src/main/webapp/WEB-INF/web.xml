@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<!--  
+	 <listener>
+	 	<listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
+	 </listener>
+	 
+	 <servlet>
+	 	<servlet-name>StudentWsService</servlet-name>
+	 	<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+	 </servlet>
+	 <servlet-mapping>
+	 	<servlet-name>StudentWsService</servlet-name>
+	 	<url-pattern>/ss</url-pattern>
+	 </servlet-mapping> -->
+	 <!-- 使用WsSpringServlet来管理 -->
+	 <servlet>
+	 	<servlet-name>StudentWsService</servlet-name>
+	 	<servlet-class>com.sun.xml.ws.transport.http.servlet.WSSpringServlet</servlet-class>
+	 </servlet>
+	 <servlet-mapping>
+	 	<servlet-name>StudentWsService</servlet-name>
+	 	<url-pattern>/ss</url-pattern>
+	 </servlet-mapping>
+	 
+	 <filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:beans.xml,classpath*:jaxws-beans.xml</param-value>
+	</context-param>
+	
+	<filter>
+		<filter-name>OpenSessionInViewer</filter-name>
+		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>OpenSessionInViewer</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+
+	<filter>
+		<filter-name>SystemContextFilter</filter-name>
+		<filter-class>org.konghao.student.filter.SystemContextFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>SystemContextFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<servlet>
+		<servlet-name>initServlet</servlet-name>
+		<servlet-class>org.konghao.student.web.InitServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>stu</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>stu</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+</web-app>

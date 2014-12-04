@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://ws.student.konghao.org" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="StudentWsService"
+	targetNamespace="http://ws.student.konghao.org">
+	<!-- 使用web container -->
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://ws.student.konghao.org">
+			<xsd:include schemaLocation="student.xsd"></xsd:include>
+			<xsd:element name="licenseInfo" type="xsd:string"/>
+			<xsd:element name="StudentWsException" type="tns:StudentWsException"></xsd:element>
+			<xsd:complexType name="StudentWsException">
+				<xsd:sequence>
+					<xsd:element name="message" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+	</wsdl:types>
+	
+	<wsdl:message name="StudentWsException">
+		<wsdl:part name="fault" element="tns:StudentWsException"/>
+	</wsdl:message>
+	
+	<wsdl:message name="licenseInfo">
+		<wsdl:part name="licenseInfo" element="tns:licenseInfo"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getStudent">
+		<wsdl:part element="tns:getStudent" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="getStudentResponse">
+		<wsdl:part element="tns:getStudentResponse" name="parameters" />
+	</wsdl:message>
+	<!-- ss -->
+	<wsdl:message name="listRpByStu">
+		<wsdl:part element="tns:listRpByStu" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="listRpByStuResponse">
+		<wsdl:part element="tns:listRpByStuResponse" name="parameters" />
+	</wsdl:message>
+	
+	<wsdl:message name="listRewardStu">
+		<wsdl:part element="tns:listRewardStu" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="listRewardStuResponse">
+		<wsdl:part element="tns:listRewardStuResponse" name="parameters" />
+	</wsdl:message>
+	
+	<wsdl:message name="listPunishStu">
+		<wsdl:part element="tns:listPunishStu" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="listPunishStuResponse">
+		<wsdl:part element="tns:listPunishStuResponse" name="parameters" />
+	</wsdl:message>
+	
+	
+	<wsdl:portType name="IStudentWsService">
+		<wsdl:operation name="getStudent">
+			<wsdl:input message="tns:getStudent" />
+			<wsdl:output message="tns:getStudentResponse" />
+			<wsdl:fault name="StudentWsException" message="tns:StudentWsException"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="listRpByStu">
+			<wsdl:input message="tns:listRpByStu" />
+			<wsdl:output message="tns:listRpByStuResponse" />
+		</wsdl:operation>
+		
+		<wsdl:operation name="listRewardStu">
+			<wsdl:input message="tns:listRewardStu" />
+			<wsdl:output message="tns:listRewardStuResponse" />
+		</wsdl:operation>
+		
+		<wsdl:operation name="listPunishStu">
+			<wsdl:input message="tns:listPunishStu" />
+			<wsdl:output message="tns:listPunishStuResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	
+	
+	<wsdl:binding name="studentWsSOAP" type="tns:IStudentWsService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getStudent">
+			<wsdl:input>
+				<soap:body use="literal" />
+				<soap:header use="literal" part="licenseInfo" message="tns:licenseInfo"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="StudentWsException">
+				<soap:fault name="StudentWsException" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		
+		<wsdl:operation name="listRpByStu">
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="listRewardStu">
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="listPunishStu">
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	
+	<wsdl:service name="StudentWsService">
+		<wsdl:port binding="tns:studentWsSOAP" name="StudentWsServicePort">
+			<soap:address location="http://localhost:8888/ss" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

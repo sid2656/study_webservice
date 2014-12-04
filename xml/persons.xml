@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE persons SYSTEM "D:\sid\workspace_webservice\xml\persons.dtd">
+<persons>
+	<person id="p2">
+		<sex/>
+		<name/>
+		<age/>
+		<messages>
+			<message>
+				<titile/>
+				<content/>
+			</message>
+		</messages>
+	</person>
+	<person id="p3">
+		<sex></sex>
+		<name></name>
+		<age></age>
+		<messages>
+			<message>
+				<titile></titile>
+				<content></content>
+			</message>
+		</messages>
+	</person>
+</persons>

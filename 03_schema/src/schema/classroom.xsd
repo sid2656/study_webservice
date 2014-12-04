@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	schema转换java文件
+	xjc -d d:/java -verbose classroom.xsd
+ -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+		xmlns:tns="http://www.example.org/classroom" 
+		targetNamespace="http://www.example.org/classroom" 
+		elementFormDefault="qualified">
+	<!-- 如果想引人，并且互相调用的话，命名空间要为同样的 -->
+	<include schemaLocation="student.xsd"/>
+	<element name="classroom" type="tns:classroomType"/>
+	<complexType name="classroomType">
+		<sequence>
+			<element name="grade" type="tns:gradeType"/>
+			<element name="name" type="string"/>
+			<!-- 
+			<element name="stus">
+				<complexType>
+					<sequence minOccurs="1" maxOccurs="unbounded">
+						<element name="student" type="tns:studentType"/>
+					</sequence>
+				</complexType>
+			</element>
+			 -->
+			<sequence minOccurs="1" maxOccurs="unbounded">
+				<element name="student" type="tns:studentType"/>
+			</sequence>
+		</sequence>
+	</complexType>
+	<simpleType name="gradeType">
+		<restriction base="int">
+			<minInclusive value="1"/>
+			<maxExclusive value="150"/>
+			<!-- 最小值包含1 -->
+			<!-- 最大值不包含 -->
+		</restriction>
+	</simpleType>
+</schema>

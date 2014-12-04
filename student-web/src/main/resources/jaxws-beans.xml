@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:ws="http://jax-ws.dev.java.net/spring/core"
+        xmlns:wss="http://jax-ws.dev.java.net/spring/servlet"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd  
+           http://jax-ws.dev.java.net/spring/core http://jax-ws.dev.java.net/spring/core.xsd
+    	   http://jax-ws.dev.java.net/spring/servlet http://jax-ws.dev.java.net/spring/servlet.xsd">
+	<!-- <bean class="org.springframework.remoting.jaxws.SimpleJaxWsServiceExporter">
+	    <property name="baseAddress" value="http://localhost:8888/ss/"/>
+	</bean> -->
+	<!-- 通过以下代码可以有效的让studentWsService被spring说管理 -->
+	<wss:binding url="/ss">
+		<wss:service>
+		<!-- bean中表示了webservice的注入对象，注意在这个里面需要在开头增加一个# -->
+			<ws:service bean="#studentWsService">
+			<!-- 把wsdl中的外部文件加入 -->
+				<ws:metadata>
+					<value>/WEB-INF/wsdl/student.xsd</value>
+				</ws:metadata>
+			</ws:service>
+		</wss:service>
+	</wss:binding>
+	
+	<bean id="studentWsService" class="org.konghao.student.ws.StudentWsService"></bean>
+	 
+</beans>

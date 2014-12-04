@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://org.konghao.cxf.cal/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CalWsService"
+	targetNamespace="http://org.konghao.cxf.cal/">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://org.konghao.cxf.cal/">
+			<xsd:include schemaLocation="cal.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+	
+	<wsdl:message name="licenseUser">
+		<wsdl:part name="licenseUser" element="tns:licenseUser"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="add">
+		<wsdl:part element="tns:add" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="addResponse">
+		<wsdl:part element="tns:addResponse" name="parameters" />
+	</wsdl:message>
+	
+	<wsdl:portType name="ICalWsService">
+		<wsdl:operation name="add">
+			<wsdl:input message="tns:add" />
+			<wsdl:output message="tns:addResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	
+	<wsdl:binding name="calWsSOAP" type="tns:ICalWsService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="add">
+			<soap:operation soapAction="" />
+			<wsdl:input>
+				<soap:body use="literal" />
+				<soap:header use="literal" part="licenseUser" message="tns:licenseUser"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	
+	<wsdl:service name="CalWsService">
+		<wsdl:port binding="tns:calWsSOAP" name="calWsPort">
+			<soap:address location="http://localhost:8889/ms" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

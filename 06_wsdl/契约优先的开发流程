@@ -1,0 +1,50 @@
+契约优先开发流程
+1.先编写schema或者wsdl文件
+2.根据这个文件生成一个客户端代码
+3.编写实现类（在实现类上指定wsdlLocation）
+4.发布服务
+
+创建wsdl
+1.在类路径META-INF下创建wsdl
+2.新建wsdl并且编写文件
+	2.1编写type
+	2.2编写message
+	2.3编写portType指定接口和方法
+	2.4编写binding指定编码样式
+	2.5编写service（name要与命名空间名称一样）
+3.根据名称生成服务器端代码
+	进入wsdl文件夹内用wsimport -d D:\sid\workspace_webservice\wsimport -keep mywsdl.wsdl
+	只留IMyService一个接口，其他的都删除
+4.编写一个实现类实现接口
+	
+5.在实现类上指定wsdl的位置
+	指定targetNameSpace与接口的一样(可以不指定，但是需要自己重新添加方法的返回标注等)
+	@WebService(endpointInterface="org.example.mywsdl.IMyService",
+			targetNamespace="http://www.example.org/mywsdl/",
+			wsdlLocation="META-INF/wsdl/mywsdl.wsdl")
+6.启动服务
+	然后在启动时候可以热修改，直接修改wsdl文件
+7.执行服务器wsimport，生成客户端代码
+	wsimport -d D:\sid\workspace_webservice\wsimport -keep -verbose http://localhost:8989/ms?wsdl
+	
+8.加入header
+	wsdl文件中修改：
+      <!-- 定义头部信息 -->
+      <xsd:element name="licenseInfo" type="xsd:string"/>
+	  <!-- 定义头信息 -->
+	  <wsdl:message name="licenseInfo">
+	  	<wsdl:part name="licenseInfo" element="tns:licenseInfo"/>
+	  </wsdl:message>
+      <!-- 在方法中加入头信息 -->
+      <soap:header use="literal" part="licenseInfo" message="tns:licenseInfo"/>
+      
+	修改IMyService的add方法
+	public int add(
+        @WebParam(name = "a", targetNamespace = "")
+        int a,
+        @WebParam(name = "b", targetNamespace = "")
+        int b,
+	    @WebParam(name = "licenseInfo", header=true)
+	    String licenseInfo);
+      
+	

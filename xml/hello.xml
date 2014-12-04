@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DTD -->
+<!--
+常用控制符：
+	?表示0次或者1次
+	*表示0次或者多次
+	+表示1次或者多次
+	默认表示1次
+
+ATTLIST定义属性
+	CDATA 字符
+	ID id不能以数字开头
+	#REQUIRED 必须存在
+-->
+<!DOCTYPE persons [
+	<!ELEMENT persons (person+)>
+	<!ELEMENT person (name,password?,age)>
+	<!ATTLIST person id ID #REQUIRED>
+	<!ATTLIST person sex CDATA #REQUIRED>
+	<!ELEMENT id (#PCDATA)>
+	<!ELEMENT name (#PCDATA)>
+	<!ELEMENT password (#PCDATA)>
+	<!ELEMENT age (#PCDATA)>
+]>
+<persons>
+	<person id="p1" sex="男">
+		<name>san</name>
+		<password>san</password>
+		<age>12</age>
+	</person>
+</persons>

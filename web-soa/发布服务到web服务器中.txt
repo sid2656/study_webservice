@@ -1,0 +1,50 @@
+wsimport -d D:\sid\workspace_webservice\wsimport -keep mywsdl.wsdl
+1.将wsdl拷贝到webContent下的WEB-INF中（导入JAX-RI包）
+ 	在wsdl中就可以使用include方式来导入了(暂时先不要进行导入，经测试发现导入可能引发问题)
+ 	修改实现类中的wsdlLocation的目录名
+2.在web-inf下创建一个文件名为：sun-jaxws.xml
+	并进行如下修改：
+	<?xml version="1.0" encoding="UTF-8"?>
+	<endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime"
+		version="2.0">
+		<!-- 1.Servlet中所需要对应的名称2.实现类3.浏览器的后缀 -->
+		<endpoint name="UserService" implementation="cn.edu.zttc.service.UserServiceImpl"
+			url-pattern="/us" />
+	</endpoints>
+3.配置web.xml
+	加入监听器
+	  <listener>
+	  	<listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
+	  </listener>
+	  <servlet>
+	  	<servlet-name>UserService</servlet-name>
+	  	<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>UserService</servlet-name>
+	  	<url-pattern>/us</url-pattern>
+	  </servlet-mapping>
+	  
+	  
+异常处理：
+
+权限控制：（通过header来做）
+1.将要传递的数据创建header元素
+2.创建message并绑定消息
+3.客户端进行header处理
+	3.1通过SAAJ（直接传递SoapBody和SOAPheader对象，通过Dispatcher传递消息）
+		客户端可以处理，服务器端无法获取
+	3.2使用SOAPHandler处理（SOAPMessageContext）
+	3.3基于JAXWS-RI的方法
+		Headers.create(element):可以吧一个dom的element转换为header元素
+4.服务器端获取
+
+
+二进制文件的处理
+1.MTOM
+	1.修改wsdl加入如下代码：
+	
+	2.在实现类中加入@MTOM
+		*只能在tomcat服务器中使用MTOM，在默认的Jetty服务器里面无法进行MTOM传递
+	3.在使用port时
+			port = us.getUserServicePort(new MTOMFeature());

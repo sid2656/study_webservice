@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	eclipse自动提示：
+		window-preferrece-xml-xml catalog然后点击add
+ -->
+<book
+	xmlns:book="http://www.example.org/book02"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.example.org/book02">
+	<id></id>
+	<title></title>
+	<content></content>
+</book>

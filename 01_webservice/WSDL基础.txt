@@ -1,0 +1,16 @@
+SOAP：Simple object access Protocol（协议）
+SOAPMessage：
+
+WSDL:（url后出现的）
+types：用来定义访问的类型
+message：SOAP
+portType：指明接口名称（绑定in和out；operation：指定方法名称）
+binding：指定传递消息所使用的格式（style：document和rpc）
+service：指定服务所发布的基本信息
+
+java EE视图：
+可以查看web service Explorer
+可以看到SOAP协议的发送与返回的xml
+
+可以用tcpMon来捕获更清晰的xml
+可以设置自己的监听端口，然后再用tcpmon来进行转发

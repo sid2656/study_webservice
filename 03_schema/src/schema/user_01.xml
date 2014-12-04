@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	eclipse自动提示：
+		window-preferrece-xml-xml catalog然后点击add
+ -->
+<user xmlns="http://www.example.org/user" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.example.org/user">
+	<id>1</id>
+	<username>zhangsan</username>
+	<born>1988-11-12</born>
+</user>

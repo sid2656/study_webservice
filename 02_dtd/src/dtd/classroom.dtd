@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	1.定义的节点不能重复（cname和sname）
+-->
+<!ELEMENT classroom (cname,cgrade,sutdents)>
+<!ATTLIST classroom cid ID #REQUIRED>
+<!ELEMENT cname (#PCDATA)>
+<!ELEMENT cgrade (#PCDATA)>
+<!ELEMENT sutdents (student+)>
+<!ELEMENT student (sid,sname,age)>
+<!ELEMENT sid (#PCDATA)>
+<!ELEMENT sname (#PCDATA)>
+<!ELEMENT age (#PCDATA)>

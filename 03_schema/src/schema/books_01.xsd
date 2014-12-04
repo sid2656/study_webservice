@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	俄罗斯玩偶方式：
+	结构清晰；但是元素无法重用
+ -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/books"
+	xmlns:tns="http://www.example.org/books" elementFormDefault="qualified">
+	<!-- 
+		books是一个负责类型 然后又三个属性：title、content和author 
+		author又是选择属性：选author或者authors 
+		authors是个负责属性：包含author 
+		
+		complexType中三种：sequence、choice、all
+		sequence：元素必须按顺序出现
+		choice：多者中选择一个
+		all：所以相同的元素只能出现一次]
+		
+		定义负责类型的属性：（在sequence之后进行定义）
+		attribute
+	-->
+
+	<element name="books">
+		<complexType>
+			<!-- minOccurs="1"设置最少一次， maxOccurs="unbounded"最多不限制；默认是一次 -->
+			<sequence minOccurs="1" maxOccurs="unbounded">
+				<element name="book">
+					<complexType>
+						<sequence minOccurs="1" maxOccurs="unbounded">
+							<element name="title" type="string" />
+							<element name="content" type="string" />
+							<choice>
+								<element name="author" type="string" />
+								<element name="authors">
+									<complexType>
+										<sequence minOccurs="1" maxOccurs="unbounded">
+											<element name="author" type="string" />
+										</sequence>
+									</complexType>
+								</element>
+							</choice>
+						</sequence>
+						<attribute name="id" type="int" use="required"></attribute>
+					</complexType>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+
+</schema>

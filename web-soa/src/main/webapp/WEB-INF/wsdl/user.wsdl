@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://service.zttc.edu.cn" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="UserService"
+	targetNamespace="http://service.zttc.edu.cn">
+	<!-- wrappered 推荐使用的方式 -->
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://service.zttc.edu.cn">
+			<!-- import是在导入的时候加入了命名空间 -->
+			<!-- <xsd:import namespace="http://service.zttc.edu.cn" schemaLocation="user.xsd"/> -->
+
+			<!-- include是在当前的schema中加入了命名空间 -->
+			<!-- <xsd:include schemaLocation="user.xsd"/> -->
+			<xsd:element name="add" type="tns:add"></xsd:element>
+			<xsd:element name="addResponse" type="tns:addResponse"></xsd:element>
+			<xsd:element name="delete" type="tns:delete"></xsd:element>
+			<xsd:element name="deleteResponse" type="tns:deleteResponse"></xsd:element>
+			<xsd:element name="list" type="tns:list"></xsd:element>
+			<xsd:element name="listResponse" type="tns:listResponse"></xsd:element>
+			<xsd:element name="login" type="tns:login"></xsd:element>
+			<xsd:element name="loginResponse" type="tns:loginResponse"></xsd:element>
+
+			<!-- 1.添加二进制文件 -->
+			<xsd:element name="upload" type="tns:upload"></xsd:element>
+			<xsd:element name="uploadResponse" type="tns:uploadResponse"></xsd:element>
+			<xsd:complexType name="uploadResponse">
+				<xsd:sequence />
+			</xsd:complexType>
+			<xsd:complexType name="upload">
+				<xsd:sequence>
+					<xsd:element name="file" type="xsd:base64Binary"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<!-- 1.添加异常 -->
+			<xsd:element name="UserRunTimeException" type="tns:UserRunTimeException"></xsd:element>
+			<xsd:complexType name="UserRunTimeException">
+				<xsd:sequence>
+					<xsd:element name="message" type="xsd:string"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<!-- 1.header添加权限 -->
+			<xsd:element name="licenceInfo" type="tns:licenceInfo"></xsd:element>
+			<xsd:complexType name="licenceInfo">
+				<xsd:sequence>
+					<xsd:element name="registUser" type="tns:user" />
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="add">
+				<xsd:sequence>
+					<xsd:element name="user" type="tns:user" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="addResponse">
+				<xsd:sequence />
+			</xsd:complexType>
+
+			<xsd:complexType name="delete">
+				<xsd:sequence>
+					<xsd:element name="username" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="deleteResponse">
+				<xsd:sequence />
+			</xsd:complexType>
+
+			<xsd:complexType name="list">
+				<xsd:sequence />
+			</xsd:complexType>
+			<xsd:complexType name="listResponse">
+				<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+					<xsd:element name="user" type="tns:user" />
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="login">
+				<xsd:sequence>
+					<xsd:element name="username" type="xsd:string" />
+					<xsd:element name="password" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="loginResponse">
+				<xsd:sequence>
+					<xsd:element name="user" type="tns:user" />
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="user">
+				<xsd:sequence>
+					<xsd:element name="username" type="xsd:string" />
+					<xsd:element name="password" type="xsd:string" />
+					<xsd:element name="nickname" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="add">
+		<wsdl:part element="tns:add" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="addResponse">
+		<wsdl:part element="tns:addResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="delete">
+		<wsdl:part element="tns:delete" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="deleteResponse">
+		<wsdl:part element="tns:deleteResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="list">
+		<wsdl:part element="tns:list" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="listResponse">
+		<wsdl:part element="tns:listResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="login">
+		<wsdl:part element="tns:login" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="loginResponse">
+		<wsdl:part element="tns:loginResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="upload">
+		<wsdl:part element="tns:upload" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="uploadResponse">
+		<wsdl:part element="tns:uploadResponse" name="parameters" />
+	</wsdl:message>
+	<!-- 2.创建异常消息 -->
+	<wsdl:message name="UserRunTimeException">
+		<wsdl:part element="tns:UserRunTimeException" name="fault" />
+	</wsdl:message>
+	<!-- 2.创建header消息消息 -->
+	<wsdl:message name="licenceInfo">
+		<wsdl:part element="tns:licenceInfo" name="licenceInfo" />
+	</wsdl:message>
+
+
+	<wsdl:portType name="IUserService">
+		<wsdl:operation name="add">
+			<wsdl:input message="tns:add" />
+			<wsdl:output message="tns:addResponse" />
+			<!-- 3.为方法设置异常 -->
+			<wsdl:fault name="UserRunTimeException" message="tns:UserRunTimeException" />
+		</wsdl:operation>
+		<wsdl:operation name="delete">
+			<wsdl:input message="tns:delete" />
+			<wsdl:output message="tns:deleteResponse" />
+			<!-- 3.为方法设置异常 -->
+			<wsdl:fault name="UserRunTimeException" message="tns:UserRunTimeException" />
+		</wsdl:operation>
+		<wsdl:operation name="list">
+			<wsdl:input message="tns:list" />
+			<wsdl:output message="tns:listResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="login">
+			<wsdl:input message="tns:login" />
+			<wsdl:output message="tns:loginResponse" />
+			<!-- 3.为方法设置异常 -->
+			<wsdl:fault name="UserRunTimeException" message="tns:UserRunTimeException" />
+		</wsdl:operation>
+		<wsdl:operation name="upload">
+			<wsdl:input message="tns:upload" />
+			<wsdl:output message="tns:uploadResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="userServiceSOAP" type="tns:IUserService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="add">
+			<wsdl:input>
+				<soap:body use="literal" />
+				<!-- 3.设置头信息 -->
+				<soap:header use="literal" part="licenceInfo" message="tns:licenceInfo"></soap:header>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<!-- 4.进行异常的fault绑定 -->
+			<wsdl:fault name="UserRunTimeException">
+				<soap:fault name="UserRunTimeException" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="delete">
+			<wsdl:input>
+				<soap:body use="literal" />
+				<!-- 3.设置头信息 -->
+				<soap:header use="literal" part="licenceInfo" message="tns:licenceInfo"></soap:header>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<!-- 4.进行异常的fault绑定 -->
+			<wsdl:fault name="UserRunTimeException">
+				<soap:fault name="UserRunTimeException" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="list">
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="login">
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<!-- 4.进行异常的fault绑定 -->
+			<wsdl:fault name="UserRunTimeException">
+				<soap:fault name="UserRunTimeException" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="upload">
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<!-- 在当前文件的最上面的name中填写的 -->
+	<wsdl:service name="UserService">
+		<wsdl:port binding="tns:userServiceSOAP" name="userServicePort">
+			<soap:address location="http://localhost:8080/web-soa/us" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

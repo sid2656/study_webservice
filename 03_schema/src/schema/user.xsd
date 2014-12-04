@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+schema的优点： 
+	1.schema出现的目的是通过一个更加合理的方式来编写xml限制文件（基于xml语法的方式） 
+	2.schema可以使用命名空间来支持多个名称相同的元素 
+	3.schema可以很好的完成对java或者所以对象的修饰并且提供了大量的数据类型
+	
+schema元素：
+	默认的命名空间(没有冒号)：xmlns="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace：定义当前schema文件的命名空间（其他引入的时候需要引入的值）
+					也可以在当前schema中引入当前文件的其他元素
+	tns：指定的命名空间前缀名为tns
+	例子：
+		<element name="tt" type="tns:test"></element>
+		<complexType name="test"></complexType>
+ -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+		targetNamespace="http://www.example.org/user"
+		xmlns:tns="http://www.example.org/user" 
+		elementFormDefault="qualified">
+	<element name="user">
+		<!-- 复杂类型 -->
+		<complexType>
+			<!-- 序列 -->
+			<sequence>
+				<element name="id" type="int"/>
+				<element name="username" type="string"/>
+				<element name="born" type="date"/>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

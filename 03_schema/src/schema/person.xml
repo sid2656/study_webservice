@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	eclipse自动提示：
+		window-preferrece-xml-xml catalog然后点击add
+ -->
+<person:person
+	xmlns:person="http://www.example.org/person"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.example.org/person" sex="男">
+	<person:name>aa</person:name>
+	<person:age>12</person:age>
+	<person:email>sdf@sdf</person:email>
+</person:person>
